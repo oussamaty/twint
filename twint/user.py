@@ -27,8 +27,14 @@ def User(ur):
     _usr.name = ur['data']['user']['legacy']['name']
     _usr.username = ur['data']['user']['legacy']['screen_name']
     _usr.bio = ur['data']['user']['legacy']['description']
-    _usr.location = ur['data']['user']['legacy']['location']
-    _usr.url = ur['data']['user']['legacy']['url']
+    if hasattr(ur['data']['user']['legacy'],'location'):
+        _usr.location = ur['data']['user']['legacy']['location']
+    else :
+        _usr.location = ''
+    if hasattr(ur['data']['user']['legacy'],'url'):
+        _usr.url = ur['data']['user']['legacy']['url']
+    else :
+        _usr.url = ''
     # parsing date to user-friendly format
     _dt = ur['data']['user']['legacy']['created_at']
     _dt = datetime.datetime.strptime(_dt, '%a %b %d %H:%M:%S %z %Y')
